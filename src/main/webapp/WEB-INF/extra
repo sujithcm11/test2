@@ -2,3 +2,21 @@
 <role rolename="manager-gui"/>
 <role rolename="manager-script"/>
 <user username="admin" password="admin123" roles="manager-gui,manager-script"/>
+
+version: '3.9' 
+services: 
+ app1: 
+  build: ./app1 
+  networks: 
+   - app-network 
+  ports: 
+   - "5000:5000" 
+ app2: 
+  build: ./app2 
+  networks: 
+   - app-network 
+  depends_on: 
+   - app1 
+networks: 
+ app-network: 
+  driver: bridge 
